@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 // short url endpoint
 app.post('/api/shorturl', async (req, res) => {
-  const urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+  const urlRegex = /^(https?):\/\/(((www.)?(\w+)\.([a-z]{2,5}))|((\d{1,3}\.){3}\d{1,3}))(\/.*)*$/g;
   if(urlRegex.test(req.body.url)) {
     const savedUrl = await saveUrl(req.body.url);
     return res.json({original_url: savedUrl.original_url, short_url: savedUrl.short_url});
