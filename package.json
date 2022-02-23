@@ -9,6 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Silvio Sol",
+  "engines": {
+    "node": "16.x"
+  },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.2",
