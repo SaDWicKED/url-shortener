@@ -16,8 +16,13 @@ app.get('/', (req, res) => {
 
 // short url endpoint
 app.post('/api/shorturl', async (req, res) => {
-  const savedUrl = await saveUrl(req.body.url);
-  return res.json({original_url: savedUrl.original_url, short_url: savedUrl.short_url});
+  const urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+  if(urlRegex.test(req.body.url)) {
+    const savedUrl = await saveUrl(req.body.url);
+    return res.json({original_url: savedUrl.original_url, short_url: savedUrl.short_url});
+  } else {
+    return res.status(400).json({error: 'invalid url'});
+  }
 });
 
 app.get('/api/shorturl/:hash', async (req, res) => {
