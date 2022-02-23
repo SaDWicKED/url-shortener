@@ -9,6 +9,7 @@ async function saveUrl(url) {
       original_url: url,
     });
 
+    // if url doesn't exist in database
     if (!existsUrl) {
       const isHashDuplicated = await urlsDatabase.findOne({
         short_url: hash,
@@ -27,7 +28,6 @@ async function saveUrl(url) {
         short_url: hash,
       })).save();
 
-      console.log(`response is ${savedUrl}`);
       return savedUrl;
     } else {
       return existsUrl;
