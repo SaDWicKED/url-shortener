@@ -21,7 +21,7 @@ app.post('/api/shorturl', async (req, res) => {
     const savedUrl = await saveUrl(req.body.url);
     return res.json({original_url: savedUrl.original_url, short_url: savedUrl.short_url});
   } else {
-    return res.status(400).json({error: 'invalid url'});
+    return res.json({error: 'invalid url'});
   }
 });
 
